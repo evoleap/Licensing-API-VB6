@@ -1,0 +1,4 @@
+frmMain = 0, 0, 625, 630, , 25, 25, 624, 627, C
+LicensingController = 200, 200, 892, 635, 
+ControlManagerFactory = 75, 75, 697, 681, 
+StatePersistence = 100, 100, 722, 706, 
