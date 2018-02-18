@@ -1,6 +1,6 @@
 Attribute VB_Name = "StatePersistence"
 Option Explicit
-Public Sub SaveValidationData(state As LicensingAPI_COM.COMValidationState, _
+Public Sub SaveValidationData(state As COMValidationState, _
     registeredUser As String, registeredEmail As String, path As String)
     Dim fso As New FileSystemObject
     Dim ts As TextStream
@@ -94,7 +94,7 @@ Public Function LoadValidationData(path As String, ByRef registeredUser As Strin
             component.TokensRequired = GetInteger(Trim(ts.ReadLine), "TokensRequired")
             component.HasFreeTrial = GetBoolean(Trim(ts.ReadLine), "HasFreeTrial")
             component.FreeTrialExpirationTime = GetDate(Trim(ts.ReadLine), "FreeTrialExpirationTime")
-            component.OriginalTokensRequired = GetInteger(Trim(ts.ReadLine), "OriginalTokensREquired")
+            component.OriginalTokensRequired = GetInteger(Trim(ts.ReadLine), "OriginalTokensRequired")
             Set comps(i - 1) = component
         Next
         ret.SetComponentsInfo comps

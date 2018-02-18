@@ -18,21 +18,21 @@ Private WithEvents m_licenseCheckTimer As Timer
 Attribute m_licenseCheckTimer.VB_VarHelpID = -1
 
 
-Private m_State As LicensingAPI_COM.COMValidationState
+Private m_State As COMValidationState
 Private m_registeredToUser As String
 Private m_registeredToEmail As String
-Private m_userIdentity As LicensingAPI_COM.COMUserIdentity
-Private m_instanceIdentity As LicensingAPI_COM.COMInstanceIdentity
+Private m_userIdentity As COMUserIdentity
+Private m_instanceIdentity As COMInstanceIdentity
 
-Private WithEvents m_identityHelper As LicensingAPI_COM.HardwareBasedInstanceIdentityHelper
+Private WithEvents m_identityHelper As COMHardwareBasedInstanceIdentityHelper
 Attribute m_identityHelper.VB_VarHelpID = -1
-Private m_instanceIdHelperInterface As LicensingAPI_COM.ICOMHardwareBasedInstanceIdentityHelper
-Private WithEvents m_userIdentityHelper As LicensingAPI_COM.ActiveDirectoryBasedUserIdentityHelper
+Private m_instanceIdHelperInterface As ICOMHardwareBasedInstanceIdentityHelper
+Private WithEvents m_userIdentityHelper As COMActiveDirectoryBasedUserIdentityHelper
 Attribute m_userIdentityHelper.VB_VarHelpID = -1
-Private m_userIdHelperInterface As LicensingAPI_COM.ICOMActiveDirectoryBasedUserIdentityHelper
-Private WithEvents m_controlManager As LicensingAPI_COM.COMControlManager
+Private m_userIdHelperInterface As ICOMActiveDirectoryBasedUserIdentityHelper
+Private WithEvents m_controlManager As COMControlManager
 Attribute m_controlManager.VB_VarHelpID = -1
-Private m_controlManagerInterface As LicensingAPI_COM.ICOMControlManager
+Private m_controlManagerInterface As ICOMControlManager
 Private m_sessionValidity As COMSessionValidity
 Private m_compEntitlements() As COMComponentEntitlementInfo
 Private m_filePath As String
@@ -65,12 +65,12 @@ Public Sub Initialize(savedStatePath As String, sessionTimer As Timer, _
         Set m_State = LoadValidationData(savedStatePath, m_registeredToUser, m_registeredToEmail)
         Call RaiseStateChangedEvent
     End If
-    Set m_identityHelper = New LicensingAPI_COM.HardwareBasedInstanceIdentityHelper
+    Set m_identityHelper = New COMHardwareBasedInstanceIdentityHelper
     Set m_instanceIdHelperInterface = m_identityHelper
-    Set m_userIdentityHelper = New LicensingAPI_COM.ActiveDirectoryBasedUserIdentityHelper
+    Set m_userIdentityHelper = New COMActiveDirectoryBasedUserIdentityHelper
     Set m_userIdHelperInterface = m_userIdentityHelper
         
-    Dim lqs As New LicensingAPI_COM.LicensingQuickStart
+    Dim lqs As New COMConnectionSettings
     lqs.Host = "http://hou-pvp2-pwe10:3000"
     lqs.Timeout_seconds = 300#
 

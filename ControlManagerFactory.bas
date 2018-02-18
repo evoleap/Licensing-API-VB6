@@ -3,12 +3,12 @@ Attribute VB_Name = "ControlManagerFactory"
 Private s_ProductId As String
 Private s_PublicKeyText As String
 
-Public Function CreateManager(userIdentity As LicensingAPI_COM.COMUserIdentity, instanceIdentity As LicensingAPI_COM.COMInstanceIdentity, _
-    savedState As LicensingAPI_COM.COMValidationState, strategy As LicensingAPI_COM.COMControlStrategy) As LicensingAPI_COM.COMControlManager
-    Dim cmf As New LicensingAPI_COM.ControlManagerFactory
-    Dim cmip As New LicensingAPI_COM.ControlManagerInitializationParameters
-    Dim cm As LicensingAPI_COM.ICOMControlManager
-    Dim userInfo As New LicensingAPI_COM.COMUserInfo
+Public Function CreateManager(userIdentity As COMUserIdentity, instanceIdentity As COMInstanceIdentity, _
+    savedState As COMValidationState, strategy As COMControlStrategy) As COMControlManager
+    Dim cmf As New ControlManagerFactory
+    Dim cmip As New ControlManagerInitializationParameters
+    Dim cm As ICOMControlManager
+    Dim userInfo As New COMUserInfo
     Set cmip.ControlStrategy = strategy
     Set cmip.instanceIdentity = instanceIdentity
     Set cmip.userIdentity = userIdentity

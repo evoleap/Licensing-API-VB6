@@ -71,7 +71,7 @@ Begin VB.Form frmMain
       _ExtentX        =   13361
       _ExtentY        =   6376
       _Version        =   393216
-      Tab             =   1
+      Tab             =   2
       TabHeight       =   520
       BeginProperty Font {0BE35203-8F91-11CE-9DE3-00AA004BB851} 
          Name            =   "Segoe UI"
@@ -91,7 +91,7 @@ Begin VB.Form frmMain
       Tab(0).ControlCount=   3
       TabCaption(1)   =   "Session"
       TabPicture(1)   =   "frmMain.frx":0099
-      Tab(1).ControlEnabled=   -1  'True
+      Tab(1).ControlEnabled=   0   'False
       Tab(1).Control(0)=   "btnBeginSession"
       Tab(1).Control(0).Enabled=   0   'False
       Tab(1).Control(1)=   "btnEndSession"
@@ -103,7 +103,7 @@ Begin VB.Form frmMain
       Tab(1).ControlCount=   4
       TabCaption(2)   =   "Components"
       TabPicture(2)   =   "frmMain.frx":00B5
-      Tab(2).ControlEnabled=   0   'False
+      Tab(2).ControlEnabled=   -1  'True
       Tab(2).Control(0)=   "label8"
       Tab(2).Control(0).Enabled=   0   'False
       Tab(2).Control(1)=   "Frame2"
@@ -114,7 +114,7 @@ Begin VB.Form frmMain
       Begin VB.CommandButton btnComponent 
          Caption         =   "Update Components"
          Height          =   495
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   31
          Top             =   1680
          Width           =   2175
@@ -141,7 +141,7 @@ Begin VB.Form frmMain
       Begin VB.Frame Frame2 
          Caption         =   "Component Details"
          Height          =   3135
-         Left            =   -71640
+         Left            =   3360
          TabIndex        =   20
          Top             =   360
          Width           =   4095
@@ -245,7 +245,7 @@ Begin VB.Form frmMain
       Begin VB.Frame Frame1 
          Caption         =   "Session Details"
          Height          =   3015
-         Left            =   2640
+         Left            =   -72360
          TabIndex        =   10
          Top             =   360
          Width           =   4815
@@ -307,7 +307,7 @@ Begin VB.Form frmMain
       Begin VB.CommandButton btnEndSession 
          Caption         =   "End Session"
          Height          =   495
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   9
          Top             =   1080
          Width           =   2175
@@ -316,7 +316,7 @@ Begin VB.Form frmMain
          Caption         =   "Begin Session"
          Enabled         =   0   'False
          Height          =   495
-         Left            =   120
+         Left            =   -74880
          TabIndex        =   8
          Top             =   480
          Width           =   2175
@@ -343,7 +343,7 @@ Begin VB.Form frmMain
       Begin VB.Label label8 
          Caption         =   "Components"
          Height          =   375
-         Left            =   -74880
+         Left            =   120
          TabIndex        =   19
          Top             =   360
          Width           =   3015
@@ -455,7 +455,7 @@ End Sub
 
 
 
-Private Sub m_controlManager_OnRegistrationCompleted(ByVal result As LicensingAPI_COM.ICOMRegistrationResult)
+Private Sub m_controlManager_OnRegistrationCompleted(ByVal result As ICOMRegistrationResult)
     If (result.Success) Then
         AddLog ("Registration succeeded")
     Else
@@ -538,7 +538,7 @@ Private Sub m_licensingController_OnLogTextAdded(text As String)
     AddLog text
 End Sub
 
-Private Sub m_licensingController_OnRegistrationCompleted(result As LicensingAPI_COM.COMRegistrationResult)
+Private Sub m_licensingController_OnRegistrationCompleted(result As COMRegistrationResult)
     Call ChangeRegisterButtonState
     If Not (m_licensingController.ValidationState Is Nothing) Then
         If m_licensingController.ValidationState.Registered Then
@@ -547,7 +547,7 @@ Private Sub m_licensingController_OnRegistrationCompleted(result As LicensingAPI
     End If
 End Sub
 
-Private Sub m_licensingController_OnSessionUpdated(result As LicensingAPI_COM.COMSessionValidity)
+Private Sub m_licensingController_OnSessionUpdated(result As COMSessionValidity)
     If (result.IsInUnregisteredGracePeriod) Then
         AddLog "Session in unregistered grace period"
     ElseIf (result.IsInValidationFailureGracePeriod) Then
@@ -569,7 +569,7 @@ Private Sub ChangeRegisterButtonState()
     End If
 End Sub
 
-Private Sub m_licensingController_OnStateChanged(state As LicensingAPI_COM.COMValidationState)
+Private Sub m_licensingController_OnStateChanged(state As COMValidationState)
     txtInstanceId.text = state.InstanceId
     If state.Registered Then
         SSTab1.TabEnabled(0) = False
